@@ -7,11 +7,14 @@ In this game, the “world” is a two-dimensional grid of tiles. While the map 
 ![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/acting.png?raw=true "Optional Title")
 
 # Game design
-Acceleration: All of the karts accelerate forwards or backwards at a rate of 0.0005 px/ms, and rotate at a rate of 0.004 radians per millisecond, except in special circumstances explained later. Also, all karts are automatically decelerated by friction, which is dependent on the type of terrain underneath the kart.
+Acceleration: All of the karts accelerate forwards or backwards at a rate of 0.0005 px/ms, and rotate at a rate of 0.004 radians per millisecond. Also, all karts are automatically decelerated by friction, which is dependent on the type of terrain underneath the kart.
 
-Players: The player (Donkey). Controlled by you; able to pick up and use items. There are three enemy karts, determined to beat you in the race. Each has a di↵erent racing strategy. Enemy karts follow the same basic rules of movement and physics as the player, except that they cannot pick up or use items.
+Players: The player (Donkey). Controlled by you; able to pick up and use items. There are three enemy karts, determined to beat you in the race. Each has a dierent racing strategy. Enemy karts follow the same basic rules of movement and physics as the player, except that they cannot pick up or use items.
 
 Collisions: When a kart A is about to move, the game checks to see if the kart is about to move within 40 pixels of another kart, B, and if so, a collision occurs. 
+
+# UML
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/uml.png?raw=true "Optional Title")
 
 Items and projectiles: Oil can – Creates an oil slick behind the player. The oil slick is placed 40 pixels away from the player, in the opposite direction to that which the player is facing. Tomato – Can be thrown at enemies in front of the player. A tomato projectile is created 40 pixels away from the player, in the direction the player is facing. The tomato projectile is given a fixed velocity of 1.7px/ms in the direction the player is facing. Boost – Activates a rocket afterburner that increases the player’s acceleration for a short time. The boost lasts for 3 seconds.
 
