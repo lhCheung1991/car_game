@@ -7,9 +7,9 @@ In this game, the “world” is a two-dimensional grid of tiles. While the map 
 ![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/acting.png?raw=true "Optional Title")
 
 # Game design
-Acceleration: All of the karts accelerate forwards or backwards at a rate of 0.0005 px/ms, and rotate at a rate of 0.004 radians per millisecond, except in special circumstances explained later. Also, all karts are automatically decelerated by friction, which is dependent on the type of terrain underneath the kart.
+Acceleration: All of the karts accelerate forwards or backwards at a rate of 0.0005 px/ms, and rotate at a rate of 0.004 radians per millisecond. Also, all karts are automatically decelerated by friction, which is dependent on the type of terrain underneath the kart.
 
-Players: The player (Donkey). Controlled by you; able to pick up and use items. There are three enemy karts, determined to beat you in the race. Each has a di↵erent racing strategy. Enemy karts follow the same basic rules of movement and physics as the player, except that they cannot pick up or use items.
+Players: The player (Donkey). Controlled by you; able to pick up and use items. There are three enemy karts, determined to beat you in the race. Each has a dierent racing strategy. Enemy karts follow the same basic rules of movement and physics as the player, except that they cannot pick up or use items.
 
 Collisions: When a kart A is about to move, the game checks to see if the kart is about to move within 40 pixels of another kart, B, and if so, a collision occurs. 
 
