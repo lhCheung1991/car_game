@@ -13,6 +13,9 @@ Players: The player (Donkey). Controlled by you; able to pick up and use items. 
 
 Collisions: When a kart A is about to move, the game checks to see if the kart is about to move within 40 pixels of another kart, B, and if so, a collision occurs. 
 
+# UML
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/uml.png?raw=true "Optional Title")
+
 Items and projectiles: Oil can – Creates an oil slick behind the player. The oil slick is placed 40 pixels away from the player, in the opposite direction to that which the player is facing. Tomato – Can be thrown at enemies in front of the player. A tomato projectile is created 40 pixels away from the player, in the direction the player is facing. The tomato projectile is given a fixed velocity of 1.7px/ms in the direction the player is facing. Boost – Activates a rocket afterburner that increases the player’s acceleration for a short time. The boost lasts for 3 seconds.
 
 # Slick two-dimensional game engine
