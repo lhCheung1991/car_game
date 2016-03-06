@@ -1,0 +1,158 @@
+import java.util.List;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+
+public class Dog extends AIPlayer{
+
+	public Dog(double x, double y, Angle angle)
+			throws SlickException {
+		super(x, y, new Image(Game.ASSETS_PATH + "/karts/dog.png"), angle);
+		// TODO Auto-generated constructor stub
+		wayPoints = new WayPoints();
+	}
+
+	@Override
+	public void followWayPoints(World world) {
+		// TODO Auto-generated method stub
+		double deltaX = wayPoints.getCurrentX() - x;
+		double deltaY = -(wayPoints.getCurrentY() - y);
+		if (!wayPoints.isFinished() && deltaX * deltaX + deltaY * deltaY <= 62500)
+		{
+			wayPoints.chargeToNext();
+		}
+		else
+		{
+			if (y < 1026 && !isFinished)
+			{
+				ranking += (++startRanking);
+				isFinished = true;
+			}
+		}
+		deltaX = wayPoints.getCurrentX() - x;
+		deltaY = -(wayPoints.getCurrentY() - y);
+		Angle bigAngle = Angle.fromRadians(Math.atan(deltaX / deltaY));
+		
+		/****************judge the angle************************/
+		if (y >= wayPoints.getCurrentY())
+		{
+			if (0 < bigAngle.getRadians() && bigAngle.getRadians() < Math.PI / 2)
+			{
+				if (-Math.PI + bigAngle.getRadians() < angle.getRadians() && angle.getRadians() < bigAngle.getRadians())
+					move(1, 1, world);
+				else
+					move(-1, 1, world);
+			}
+			else if (-Math.PI / 2 < bigAngle.getRadians() && bigAngle.getRadians() < 0)
+			{
+				if (bigAngle.getRadians() < angle.getRadians() && angle.getRadians() < Math.PI + bigAngle.getRadians())
+					move(-1, 1, world);
+				else
+					move(1, 1, world);
+			}
+		}
+		else
+		{
+			bigAngle = Angle.fromRadians(bigAngle.getRadians() + Math.PI);
+			if (Math.PI / 2 < bigAngle.getRadians() && bigAngle.getRadians() < Math.PI)
+			{
+				if (bigAngle.getRadians() - Math.PI < angle.getRadians() && angle.getRadians() < bigAngle.getRadians())
+					move(1, 1, world);
+				else
+					move(-1, 1, world);
+			}
+			else if (-Math.PI < bigAngle.getRadians() && bigAngle.getRadians() < -Math.PI / 2)
+			{
+				if (bigAngle.getRadians() < angle.getRadians() && angle.getRadians() < bigAngle.getRadians() + Math.PI)
+					move(-1, 1, world);
+				else
+					move(1, 1, world);
+			}
+		}
+		/****************judge the angle************************/
+	}
+
+	@Override
+	public void move(double rotate_dir, double move_dir, World world) {
+		// TODO Auto-generated method stub
+		
+//		When she is ahead of Donkey (see Ranking and game ending), she accelerates at 0.9 times the normal 
+//		rate (0.00045px/ms2), to give you a chance to catch up. But, when she is behind Donkey, she accelerates 
+//		at 1.1 times the normal rate (0.00055px/ms2), to catch up to you!
+		if (isSpinning())
+        {
+        	velocity = 0;
+        	rotate_dir = 1;
+        	move_dir = 0;
+        }
+		
+		Player player = world.getPlayer();
+		
+		if (y >= player.getY())
+			accelerationTimes = 1.1;
+		else
+			accelerationTimes = 0.9;
+			
+		
+		int delta = 1;
+        // Modify the player's angle
+        Angle rotateamount = new Angle(ROTATE_SPEED * rotate_dir * delta * spinRatateTimes);
+        angle = angle.add(rotateamount);
+        // Determine the friction of the current location
+        double friction = world.frictionAt((int) x, (int) y);
+        // Modify the player's velocity. First, increase due to acceleration.
+        velocity += ACCELERATION * move_dir * delta * accelerationTimes;
+        // Then, reduce due to friction (this has the effect of creating a
+        // maximum velocity for a given coefficient of friction and
+        // acceleration)
+        velocity *= Math.pow(1 - friction, delta);
+
+        // Modify the position, based on velocity
+        // Calculate the amount to move in each direction
+        double amount = velocity * delta;
+        // Compute the next position, but don't move there yet
+        double next_x = x + angle.getXComponent(amount);
+        double next_y = y + angle.getYComponent(amount);
+        // If the intended destination is a blocking tile, do not move there
+        // (crash) -- instead, set velocity to 0
+        if (world.blockingAt((int) next_x, (int) next_y))
+        {
+            velocity = 0;
+        }
+        else
+        {
+            // Actually move to the intended destination
+            x = next_x;
+            y = next_y;
+            List<AIPlayer> aiPlayerList = world.getAiPlayerList();
+            for (int i = 0; i < aiPlayerList.size(); i++)
+            {
+            	if (this != aiPlayerList.get(i) && this.collides(aiPlayerList.get(i)))
+            	{
+            		velocity = 0;
+            	}
+            		
+            }
+            if (this.collides(world.getPlayer()))
+            	velocity = 0;
+        }
+	}
+
+	@Override
+	public void render(Graphics g, Camera camera) {
+		// TODO Auto-generated method stub
+		// Calculate the player's on-screen location from the camera
+        int screen_x = (int) (x - camera.getLeft());
+        int screen_y = (int) (y - camera.getTop());
+        img.setRotation((float) angle.getDegrees());
+        img.drawCentered(screen_x, screen_y);
+        g.drawLine(screen_x, screen_y, wayPoints.getCurrentX() - camera.getLeft(), wayPoints.getCurrentY() - camera.getTop());
+        if (isFinished)
+        {
+        	g.drawString("Dog Ranking : " + ranking, 50, 50);
+        }
+	}
+
+}
