@@ -14,6 +14,14 @@ Players: The player (Donkey). Controlled by you; able to pick up and use items. 
 Collisions: When a kart A is about to move, the game checks to see if the kart is about to move within 40 pixels of another kart, B, and if so, a collision occurs. 
 
 Items and projectiles: Oil can – Creates an oil slick behind the player. The oil slick is placed 40 pixels away from the player, in the opposite direction to that which the player is facing. Tomato – Can be thrown at enemies in front of the player. A tomato projectile is created 40 pixels away from the player, in the direction the player is facing. The tomato projectile is given a fixed velocity of 1.7px/ms in the direction the player is facing. Boost – Activates a rocket afterburner that increases the player’s acceleration for a short time. The boost lasts for 3 seconds.
-![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/item.png?raw=true "Optional Title")
-![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/player.png?raw=true "Optional Title")
 
+# Slick two-dimensional game engine
+Slick2D is an easy to use set of tools and utilites wrapped around LWJGL OpenGL bindings to make 2D Java game development easier.
+I like the tile map system of Slick, it is very easy to manipulate. 
+
+Offical Site of Slick: [http://slick.ninjacave.com/](http://slick.ninjacave.com/)
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/slick.png?raw=true "Optional Title")
+
+# Run this project
+I think this game is not a bad study material for the new game programmer, it will help you comprehend all the fundamental concepts of game developing. If you try to run this project, you get to notice the following points: 1. Remember to import the external jar file; 2. Choose the appropriate native library based on your Operating System.
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/config.png?raw=true "Optional Title")
