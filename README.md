@@ -20,4 +20,8 @@ Slick2D is an easy to use set of tools and utilites wrapped around LWJGL OpenGL 
 I like the tile map system of Slick, it is very easy to manipulate. 
 
 Offical Site of Slick: [http://slick.ninjacave.com/](http://slick.ninjacave.com/)
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/slick.png?raw=true "Optional Title")
 
+# Run this project
+I think this game is not a bad study material for the new game programmer, it will help you comprehend all the fundamental concepts of game developing. If you try to run this project, you get to notice the following points: 1. Remember to import the external jar file; 2. Choose the appropriate native library based on your Operating System.
+![Alt text](https://github.com/lhCheung1991/car_game/blob/master/image/config.png?raw=true "Optional Title")
